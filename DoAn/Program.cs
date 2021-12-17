@@ -48,7 +48,7 @@ namespace DoAn
                     Thegraph.choo();
                     continue;
                 }
-                else if(z==5)
+                else if(z>=5)
                 {
                     break;
                 }
@@ -78,7 +78,7 @@ namespace DoAn
                     Console.WriteLine("\n-Bread First Search: ");
                     Thegraph.Bread();
                 }
-            } while (z < 5);
+            } while (true);
         }
     }
 }

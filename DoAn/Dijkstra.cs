@@ -67,7 +67,7 @@ namespace DoAn
         }
         public int start1()
         {
-        huy:
+        test:
             for (int i = 0; i < nVerts; i++)
             {
                 if (f.ToUpper() == ((Router)vertexList[i].label).getid())
@@ -77,7 +77,7 @@ namespace DoAn
             }
             Console.Write("Không tìm thấy Router xin nhập lại: ");
             f = Console.ReadLine();
-            goto huy;
+            goto test;
 
         }
         public void AddEdge(int start, int theEnd, int weight)
@@ -158,13 +158,17 @@ namespace DoAn
                     }
                 }
             }
-            if( t==1)
+            if(t==1)
             {
                 Displaypath();
             }
             else if (t == 2)
             {
                 lone();
+            }
+            else if(t==3)
+            {
+
             }
             nTree = 0;
             for (int j = 0; j <= nVerts - 1; j++)
@@ -225,25 +229,34 @@ namespace DoAn
 
             }
         }
-        public void lone()
+        public string lone()
         {
+            Group10:
+            int u = 0;
             Console.Write("Đến Router mong muốn(id): ");
             string s = Console.ReadLine();
             for (int j = 1; j < nVerts; j++)
             {
                 if (s.ToUpper() == ((Router)vertexList[j].label).getid())
                 {
+                    u++;
                     Console.Write("->Từ {0} đến {1}: ", ((Router)vertexList[0].label).getid(), ((Router)vertexList[j].label).getid());
                     Console.WriteLine(sPath[j].distance + " phút ");
                     if (sPath[j].parentvert == 0 || sPath[j].parentvert == infinity)
                     {
 
-                        Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ((Router)vertexList[j].label).getid());
+                       return "Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ((Router)vertexList[j].label).getid();
                     }
                     else
-                        Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ff[j]);
+                       return "Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ff[j];
                 }
             }
+            if(u==0)
+            {
+                Console.WriteLine("Không tìm thấy Router xin nhập lại");
+                goto Group10;
+            }
+            return null;
         }
         private int getadj(int v)
         {
@@ -262,6 +275,7 @@ namespace DoAn
         }
         public void DepthFirstSearch()
         {
+            Path(0);
             vertexList[0].isintree = true;
             showvertex(0);
             Stack gStack = new Stack();
@@ -283,6 +297,7 @@ namespace DoAn
         }
         public void Bread()
         {
+            Path(0);
             Queue gque = new Queue();
             vertexList[0].isintree = true;
             showvertex(0);
@@ -304,6 +319,7 @@ namespace DoAn
             {
                 vertexList[i].isintree = false;
             }
+            Console.WriteLine();
         }
         public void choo()
         {
