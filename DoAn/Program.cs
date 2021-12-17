@@ -10,6 +10,7 @@ namespace DoAn
     {
         static void menu()
         {
+            Console.WriteLine("             menu    ");
             Console.WriteLine("1: Xem giá cao và thấp nhất");
             Console.WriteLine("2: Từ Router đã chọn đến tất cả các Router");
             Console.WriteLine("3: Từ Router đã chọn đến một Router khác");
