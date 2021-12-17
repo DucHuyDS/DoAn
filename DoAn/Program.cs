@@ -11,6 +11,17 @@ namespace DoAn
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("\t\tĐỒ ÁN: CẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT");
+            Console.WriteLine("\t\t\tNHÓM 10, LỚP: DS001");
+            Console.WriteLine("\t\tCác thành viên:");
+            Console.WriteLine("\t\t-Nguyễn Đức Huy");
+            Console.WriteLine("\t\t-Trương Thế Bảo");
+            Console.WriteLine("\t\t-Lê Minh Hoàng");
+            Console.WriteLine("\t\t-Nguyễn Văn Hoàng Dũng");
+            Console.WriteLine("\t\t-Bùi Nhật Tuấn");
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.Write("Nhập Router bắt đầu(id): ");
             Graph Thegraph = new Graph();
             Thegraph.AddVertex(new Router("RT0", "11/3", 2021, 144, 250000));
             Thegraph.AddVertex(new Router("RT1", "25/4", 2020, 200, 400000));
@@ -34,7 +45,6 @@ namespace DoAn
             Thegraph.Bread();
             Console.WriteLine();
             Thegraph.choo();
-
         }
     }
 }

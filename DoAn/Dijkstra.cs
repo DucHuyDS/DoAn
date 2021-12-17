@@ -31,7 +31,6 @@ namespace DoAn
     {
         private const int max_verts = 20;
         int infinity = 1000000;
-        int[,] adjMat1;
         int nTree;
         Distoriginal[] sPath;
         int currentVert;
@@ -44,18 +43,32 @@ namespace DoAn
         {
             vertexList = new Vertex[max_verts];
             adjMat = new int[max_verts, max_verts];
-            adjMat1 = new int[max_verts, max_verts];
             nVerts = 0; nTree = 0;
             for (int j = 0; j <= max_verts - 1; j++)
             {
                 for (int k = 0; k <= max_verts - 1; k++)
                 {
                     adjMat[j, k] = infinity;
-                    adjMat1[j, k] = 0;
                     sPath = new Distoriginal[max_verts];
                 }
 
             }
+        }
+        private string f = Console.ReadLine();
+        public int start1()
+        {
+        huy:
+            for (int i = 0; i < nVerts; i++)
+            {
+                if (f.ToUpper() == ((Router)vertexList[i].label).getid())
+                {
+                    return i;
+                }
+            }
+            Console.Write("Không tìm thấy Router xin nhập lại: ");
+            f = Console.ReadLine();
+            goto huy;
+
         }
         public void AddVertex(object lab)
         {
@@ -64,16 +77,49 @@ namespace DoAn
         }
         public void AddEdge(int start, int theEnd, int weight)
         {
-            adjMat[start, theEnd] = weight;
-            adjMat1[start, theEnd] = 1;
-            adjMat1[theEnd, start] = 1;
+            if (start == start1())
+            {
+                adjMat[0, theEnd] = weight;
+                adjMat[theEnd, 0] = weight;
+            }
+            else if (theEnd == start1())
+            {
+                adjMat[start, 0] = weight;
+                adjMat[0, start] = weight;
+            }
+            else if (start == 0)
+            {
+                adjMat[start1(), theEnd] = weight;
+                adjMat[theEnd, start1()] = weight;
+            }
+            else if (theEnd == 0)
+            {
+                adjMat[start, start1()] = weight;
+                adjMat[start1(), start] = weight;
+            }
+            else
+            {
+                adjMat[start, theEnd] = weight;
+                adjMat[theEnd, start] = weight;
+            }
+            for (int i = 0; i < nVerts; i++)
+            {
+                if (adjMat[i, i] < infinity)
+                {
+                    adjMat[i, start1()] = adjMat[i, i];
+                    adjMat[i, i] = infinity;
+                }
+            }
         }
         public void Path()
         {
+            vertexList[nVerts] = vertexList[start1()];
+            vertexList[start1()] = vertexList[0];
+            vertexList[0] = vertexList[nVerts];
             int startTree = 0;
             vertexList[startTree].isintree = true;
             nTree = 1;
-            for (int j = 0; j <= nVerts; j++)
+            for (int j = 0; j <= nVerts - 1; j++)
             {
                 int tempDist = adjMat[startTree, j];
                 sPath[j] = new Distoriginal(startTree, tempDist);
@@ -92,7 +138,7 @@ namespace DoAn
             {
                 if (ff[i] != null)
                 {
-                    for (int j = i + 1; j < nVerts; j++)
+                    for (int j = 0; j < nVerts; j++)
                     {
                         if (ff[j] != null)
                         {
@@ -147,30 +193,32 @@ namespace DoAn
 
                     }
                     column++;
+
                 }
         }
         public void Displaypath()
         {
-            Console.WriteLine("|Thời gian ngắn nhất|");
+            Console.WriteLine("|Thời gian ngắn nhất để kết nối đến tất cả các Router còn lại|");
 
             for (int j = 1; j < nVerts; j++)
             {
-                Console.Write(">Từ {0} đến {1}: ", ((Router)vertexList[0].label).getid(), ((Router)vertexList[j].label).getid());
+                Console.Write("->Từ {0} đến {1}: ", ((Router)vertexList[0].label).getid(), ((Router)vertexList[j].label).getid());
                 Console.WriteLine(sPath[j].distance + " phút ");
-                if (sPath[j].parentvert == 0)
+                if (sPath[j].parentvert == 0 || sPath[j].parentvert == infinity)
                 {
 
                     Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ((Router)vertexList[j].label).getid());
                 }
                 else
                     Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ff[j]);
+
             }
         }
         private int getadj(int v)
         {
             for (int j = 0; j <= nVerts - 1; j++)
             {
-                if (adjMat1[v, j] == 1 && vertexList[j].isintree == false)
+                if (adjMat[v, j] != infinity && vertexList[j].isintree == false)
                 {
                     return j;
                 }
