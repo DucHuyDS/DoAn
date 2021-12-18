@@ -233,8 +233,10 @@ namespace DoAn
         {
             Group10:
             int u = 0;
+            Console.ResetColor();
             Console.Write("Đến Router mong muốn(id): ");
             string s = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             for (int j = 1; j < nVerts; j++)
             {
                 if (s.ToUpper() == ((Router)vertexList[j].label).getid())

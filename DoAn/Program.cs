@@ -20,6 +20,7 @@ namespace DoAn
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("\t\tĐỒ ÁN: CẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT");
             Console.WriteLine("\t\t\tNHÓM 10, LỚP: DS001");
@@ -30,6 +31,7 @@ namespace DoAn
             Console.WriteLine("\t\t-Nguyễn Văn Hoàng Dũng");
             Console.WriteLine("\t\t-Bùi Nhật Tuấn");
             Console.WriteLine("----------------------------------------------------------------------");
+            Console.ResetColor();
             int z;
             do
             {
@@ -46,7 +48,9 @@ namespace DoAn
                 Thegraph.AddVertex(new Router("RT5", "22/10", 2019, 150, 250000));
                 if(z==1)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Thegraph.choo();
+                    Console.ResetColor();
                     continue;
                 }
                 else if(z>=5)
@@ -63,7 +67,8 @@ namespace DoAn
                 Thegraph.AddEdge(2, 5, 1);
                 Thegraph.AddEdge(2, 3, 2);
                 Thegraph.AddEdge(3, 4, 3);
-                Thegraph.AddEdge(5, 4, 2); 
+                Thegraph.AddEdge(5, 4, 2);
+                Console.ForegroundColor = ConsoleColor.Green;
                 if (z == 2)
                 {
                     Thegraph.Path(1);
@@ -79,6 +84,7 @@ namespace DoAn
                     Console.WriteLine("\n-Bread First Search: ");
                     Thegraph.Bread();
                 }
+                Console.ResetColor();
             } while (true);
         }
     }
