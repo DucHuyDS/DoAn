@@ -245,10 +245,10 @@ namespace DoAn
                     if (sPath[j].parentvert == 0 || sPath[j].parentvert == infinity)
                     {
 
-                       return "Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ((Router)vertexList[j].label).getid();
+                       Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ((Router)vertexList[j].label).getid());
                     }
                     else
-                       return "Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ff[j];
+                        Console.WriteLine("Đường đi:" + ((Router)vertexList[0].label).getid() + "-" + ff[j]);
                 }
             }
             if(u==0)
